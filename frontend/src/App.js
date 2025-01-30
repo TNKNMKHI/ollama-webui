@@ -1,5 +1,6 @@
 import { ChakraProvider, Container, VStack, Input, Button, Box, Text, extendTheme } from '@chakra-ui/react';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { ModelSelector } from './components/ModelSelector';
 import { ollamaApi } from './services/ollamaApi';
 
@@ -80,7 +81,27 @@ function App() {
                 my={2}
                 borderRadius="md"
               >
-                <Text>{message.content}</Text>
+                {message.content.split(/<think>|<\/think>/).map((part, i) => (
+                  i % 2 === 0 ? (
+                    <ReactMarkdown key={i}>
+                      {part}
+                    </ReactMarkdown>
+                  ) : (
+                    <Box
+                      key={i}
+                      borderWidth="1px"
+                      borderColor="gray.200"
+                      bg="white"
+                      p={3}
+                      my={2}
+                      borderRadius="md"
+                    >
+                      <ReactMarkdown>
+                        {part}
+                      </ReactMarkdown>
+                    </Box>
+                  )
+                ))}
               </Box>
             ))}
           </Box>

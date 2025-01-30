@@ -4,7 +4,7 @@ const API_BASE_URL = 'http://localhost:11434/api';  // 直接Ollamaサーバー�
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 600000,  // タイムアウトを60秒に延長
+  timeout: 600000,  // タイムアウトを600秒に延長
   headers: {
     'Content-Type': 'application/json',
   }
